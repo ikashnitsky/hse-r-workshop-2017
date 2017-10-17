@@ -1,0 +1,286 @@
+---
+title: "R - the tool"
+author: Ilya Kashnitsky
+date: 17 October 2017
+output:
+  revealjs::revealjs_presentation:
+    theme: serif
+    highlight: zenburn
+    center: TRUE
+    transitionSpeed: fast
+    transition: slide
+    incremental: false
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    self_contained: true
+    fig_width: 10
+    fig_height: 7
+    fig_caption: false
+    smart: true
+    mathjax: null
+---
+
+```{r setup, include=FALSE}
+stripcolour <- "grey93"
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, cache = TRUE)
+
+library(stats)
+library(ik)
+library(tidyverse)
+library(ggthemes)
+library(knitr)
+library(rmarkdown)
+library(revealjs)
+theme_set(theme_minimal() +
+    theme(panel.background = element_blank(),
+          strip.background = element_rect(colour = NA, fill = stripcolour)))
+```
+
+        
+# What is R? {data-background=#ffcccc} 
+
+##
+![Rlogo](http://i.imgur.com/rXjiJa5.png)
+
+>- R is a language and environment for statistical computing and graphics
+>- Open source
+>- The most widely used statistical software in the world
+>- Amazing number of contributors
+
+
+## Who use R?
+>- Researchers
+>- Data analysts
+>- Programmers
+>- Journalists
+>- Web designers
+  
+>- <span style="font-size:1.2em; color:green">In academia R *de-facto* is the standard tool</span>
+
+## Illustration
+
+##
+<iframe width="980px" height="630px" style="background: #FFFFFF;" src="https://www.r-users.com"></iframe>
+<span style="font-size:0.7em">https://www.r-users.com</span>
+
+##
+<iframe width="980px" height="630px" style="background: #FFFFFF;" src="http://blog.revolutionanalytics.com/2014/05/companies-using-r-in-2014.html"></iframe>
+<span style="font-size:0.7em">http://blog.revolutionanalytics.com/2014/05/companies-using-r-in-2014.html</span>
+
+
+
+## Why R?
+
+*"R offers a breadth and depth in statistical computing beyond what is available in commercial closed source products. Yet R remains, primarily, a programming language for the highly skilled statistician, and out of the reach of many."*
+
+<span style="font-size:0.7em">Williams, G. J. (2009). Rattle: A Data Mining GUI for R. The R Journal, 1/2, 45-55.</span>
+
+
+
+## PRO
+>- Open source
+>- Reproducible
+>- Easy and fast to work with large datasets
+
+>- <span style="font-size:1.2em; color:green">Most importantly, R can easily replace most of the tools one uses daily for research</span>
+
+## CONTRA
+>- Steep learning curve
+>- Not perfect for handling survey data (metadata)
+
+
+
+# Examples of data visualization {data-background=#cce5cc}
+
+##
+<iframe width="980px" height="630px" style="background: #FFFFFF;" src="https://ourworldindata.org"></iframe>
+<span style="font-size:0.7em">https://ourworldindata.org</span>
+
+##
+<iframe width="980px" height="630px" style="background: #FFFFFF;" src="https://jschoeley.shinyapps.io/hmdexp"></iframe>
+<span style="font-size:0.7em">https://jschoeley.shinyapps.io/hmdexp</span>
+
+##
+<iframe width="980px" height="630px" style="background: #FFFFFF;" src="http://bancdadesced.uab.es/population_change/"></iframe> 
+<span style="font-size:0.7em">http://bancdadesced.uab.es/population_change/</span>
+
+##
+<iframe width="980px" height="630px" style="background: #FFFFFF;" src="http://www.global-migration.info"></iframe> 
+<span style="font-size:0.7em">http://www.global-migration.info</span>
+
+## Election 2016: Exit Polls
+<span style="font-size:1.2em">http://www.nytimes.com/interactive/2016/11/08/us/politics/election-exit-polls.html</span>
+
+## A Day in the Life of Americans
+<span style="font-size:1.5em">http://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans</span>
+
+## Where People Run in Major Cities
+<span style="font-size:1.5em">http://flowingdata.com/2014/02/05/where-people-run/</span>
+
+
+
+# Reproducible research {data-background=#ffeb7f}
+
+## Reproducibility
+>- Reproducibility of scientific results is the main challenge of the modern academia
+>- Collaboration, Open Science (2015). Estimating the reproducibility of psychological science. *Science*, 349(6251), aac4716. https://doi.org/10.1126/science.aac4716
+>- Out of 100 papers only 39 were replicated
+
+## Literate programming
+>- The idea of [literate programming](http://www.literateprogramming.com) dates back to mid-80s 
+>- The core idea: <span style="color:blue">code</span>, <span style="color:green">comments</span>, and <span style="color:red">results</span> should appear together in one document.
+
+## R notebooks
+>- The [recently presented](https://blog.rstudio.org/2016/11/01/announcing-rstudio-v1-0/) v1.0 version of RStudio brings R-notebooks as on of the main features.   
+>- This type of document implements the principles of literate programming. 
+
+##
+<iframe width="980px" height="630px" style="background: #FFFFFF;" src="http://www.danielwells.me/human-lifespan-limit/"></iframe>
+<span style="font-size:0.7em">http://www.danielwells.me/human-lifespan-limit/</span>
+
+# Practice {data-background=#ffffff}
+
+## Swirl
+- <span style="font-size:1.5em">`install.packages('swirl')`</span>
+- <span style="font-size:1.5em">`library(swirl)`</span>
+- <span style="font-size:1.5em">`swirl()`</span>
+
+
+
+
+# Tidyverse {data-background=#cefafa} 
+
+## The most influential R developer
+
+## Hadley Wickham
+![hadley](http://i.imgur.com/BHfreww.jpg)
+
+
+## tidyverse
+<iframe width="980px" height="500px" style="background: #FFFFFF;" src="https://blog.rstudio.org/2016/09/15/tidyverse-1-0-0/"></iframe>
+<span style="font-size:0.7em">https://blog.rstudio.org/2016/09/15/tidyverse-1-0-0/</span>
+
+## tidy data
+Wickham, H. (2014). Tidy Data. *Journal of Statistical Software*, 59(10). Retrieved from http://www.jstatsoft.org/v59/i10
+
+##
+Tidy data is a standard way of mapping the meaning of a dataset to its structure. 
+
+A dataset is messy or tidy depending on how rows, columns and tables are matched up with observations, variables and types. 
+
+In **tidy data**:
+
+> 1. Each variable forms a column.
+> 2. Each observation forms a row.
+> 3. Each type of observational unit forms a table.
+
+
+# Examples and exercises {data-background=#ffffff}
+
+##
+>- <span style="font-size:1.5em">Please follow me on the R script `"examples-tidyverse.R"`</span>
+>- <span style="font-size:1.5em">Then proceed to `"exercises.R"`</span>
+
+
+
+# Demographic data acquisition {data-background=#ffeb7f}
+
+##
+<iframe width="980px" height="630px" style="background: #FFFFFF;" src="https://ikashnitsky.github.io/2017/data-acquisition-one/"></iframe>
+<span style="font-size:0.7em">https://ikashnitsky.github.io/2017/data-acquisition-one//hmdexp</span>
+
+
+
+# Visualizing data with `ggplot2` {data-background=#ffcccc} 
+
+
+# A bit more motivation {data-background=#cce5cc}
+
+
+##
+<iframe width="980px" height="630px" src="http://qz.com/316906/the-dude-map-how-american-men-refer-to-their-bros/"></iframe>
+<span style="font-size:0.7em">http://qz.com/316906/the-dude-map-how-american-men-refer-to-their-bros</span>
+
+## Visualizing life tables
+<span style="font-size:1.5em">http://flowingdata.com/2016/01/19/how-you-will-die</span>
+
+##
+<iframe width="980px" height="630px" src="https://www.r-bloggers.com/pisa-2015-how-to-readprocessplot-the-data-with-r"></iframe>
+<span style="font-size:0.7em">https://www.r-bloggers.com/pisa-2015-how-to-readprocessplot-the-data-with-r</span>
+
+## American schools
+<span style="font-size:1.2em">http://www.nytimes.com/interactive/2016/04/29/upshot/money-race-and-success-how-your-school-district-compares.html</span>
+
+
+
+
+        
+# Plotting systems in R? {data-background=#ffcccc} 
+
+##
+>- `base`
+>- `lattice`
+>- <span style="font-size:1.5em; color:green">`ggplot2`</span>
+
+## "The winner takes it all"
+![cat](http://i.imgur.com/zJkOsg6.gif)
+
+
+
+## {data-background="http://i.imgur.com/bObt6rP.png"} 
+
+
+## Strength of `base` plotting system
+>- Usually, `base` knows how to plot an object
+>- Extremely easy to use if you are happy with the default settings
+>- <span style="font-size:1.5em; color:red">BUT</span>
+>- Now `ggplot2` has the `autoplot` function
+
+
+## The only example when `ggplot2` failed for me {data-background=#ffcccc}
+
+<span style="font-size:1.5em">http://stackoverflow.com/questions/17753502</span>
+
+<span style="font-size:1.5em">https://github.com/tidyverse/ggplot2/issues/1720</span>
+
+
+
+
+
+# What makes `ggplot2` special? {data-background=#cefafa}
+
+##
+<span style="font-size:1.5em">"gg" means "Grammar of graphics"</span>
+  
+<iframe width="980px" height="500px" src="http://www.springer.com/us/book/9780387245447"></iframe>
+<span style="font-size:0.7em">http://www.springer.com/us/book/9780387245447</span>
+
+
+## Extremely big and helpful community
+>- Help
+>- Examples
+>- Rapid development
+>- Extensions
+
+##
+<iframe width="980px" height="630px" src="http://www.ggplot2-exts.org/gallery/"></iframe>
+<span style="font-size:0.7em">http://www.ggplot2-exts.org/gallery/</span>
+
+
+## Amazing documentation
+>- Whenever you have a question on `ggplot2`, the first place to go is 
+>- http://docs.ggplot2.org/current
+
+##
+<iframe width="980px" height="630px" src="http://docs.ggplot2.org/current/"></iframe>
+<span style="font-size:0.7em">http://docs.ggplot2.org/current</span>
+
+
+
+# `ggplot2` show {data-background=#ffffff}
+
+## Please follow me on "`examples-ggplot2.R`"
+
+
+
