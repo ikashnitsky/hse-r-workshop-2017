@@ -24,7 +24,7 @@ library(readxl)
 readxl::excel_sheets('data/data-denmark.xlsx')
         
 deaths <- read_excel(path = 'data/data-denmark.xlsx', sheet = 'deaths')
-pop <- read_excel()
+pop <- read_excel(path = 'data/data-denmark.xlsx', sheet = 'pop')
 
 ################################################################################
 # Read the data with readxl
@@ -38,26 +38,26 @@ pop <- read_excel(path = 'data/data-denmark.xlsx', sheet = 'pop')
 
 ################################################################################
 # Reshaping data with tidyr
-pop_w <- rename(.data = pop, population = value)
-pop_w <- spread(data = pop_w, region, population)
-
 
 # to wide format
+pop_w <- spread(data = pop, key = year, value = value)
+
+# equvalently we can start usin the piping operator ( %>% )
 pop_w <- pop %>% 
-        spread(region, value)
+        spread(year, value)
 
 # back to long format
 pop_l <- pop_w %>% 
-        gather(key = "region", value = "value", contains('DK'))
+        gather(key = "year", value = "value", contains("y200"))
 
 ################################################################################
 # Basic dplyr functions
 
 # filter
-pop_filt <- pop %>% filter(year=='y2003', !sex=='b', value > 20000)
+pop_filt <- pop %>% filter(year=='y2003', !sex=='b')
 
 # select
-pop_select <- pop %>% select(1,4)
+pop_select <- pop %>% select(contains("a"))
 
 
 # bind dfs
@@ -65,11 +65,14 @@ df_bind <- bind_rows(pop, deaths)
 
 
 # join
-df_joined <- left_join(deaths, pop, by = c("year", "region", "sex", "age"))
+df_joined <- left_join(deaths, pop, by = c("year", "region", "sex", "age")) %>% 
+        transmute(year, region, sex, age,
+                  deaths = value.x,
+                  pop = value.y)
 
 
 # mutate & transmute
-df <- df_joined %>% mutate(qx = value.x / value.y)
+df <- df_joined %>% mutate(qx = deaths / pop)
 
 df_tr <- df_joined %>% transmute(region, sex, qx = value.x / value.y)
 
@@ -77,7 +80,7 @@ df_tr <- df_joined %>% transmute(region, sex, qx = value.x / value.y)
 
 
 # group %>% summarize %>% ungroup
-df_sum <- pop %>% group_by(year, sex, age) %>% 
+df_sum <- pop %>% group_by(region, sex, age) %>% 
         summarise(mean = mean(value)) %>% 
         ungroup()
 
@@ -98,3 +101,10 @@ df <- inner_join(deaths, pop, by = c('year',"region",'sex','age')) %>%
         mutate(qx = deaths / pop)
 
 save(df, file = 'data/Denmark.Rdata')
+
+
+# Erase all objects in memory
+rm(list = ls(all = TRUE))
+
+# load the result again
+load("data/Denmark.Rdata")
