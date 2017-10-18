@@ -23,7 +23,8 @@ obj <- lm(data = swiss, Fertility ~ Education)
 plot(obj)
 
 # blank map
-shapefile <- rgdal::readOGR('data/.', 'shape-france')
+library(rgdal)
+shapefile <- readOGR('data/.', 'shape-france')
 plot(shapefile)
 
 
@@ -51,6 +52,7 @@ test +
 
 
 # line / path
+
 df_lake <- data.frame(level = LakeHuron %>% unclass() %>% as.numeric(),
                       year=1875:1972)
 
@@ -61,8 +63,33 @@ ggplot(df_lake)+
         geom_path(aes(x = year, y = level))
 
 
+library(gapminder)
+
+gapminder %>% 
+        select(1:4) %>% 
+        group_by(continent, year) %>% 
+        summarise(avg_e0 = lifeExp %>% mean) %>% 
+        ungroup() %>% 
+        ggplot(aes(x = year, y = avg_e0, 
+                   color = continent))+
+        geom_path(size = 1)+
+        theme_minimal(base_family = "mono")
+        
+
+gapminder %>% 
+        ggplot(aes(x = year, y = lifeExp, 
+                   color = continent))+
+        geom_jitter(size = 1, alpha = .2, width = .75)+
+        stat_summary(geom = "path", fun.y = mean, size = 1)+
+        theme_minimal(base_family = "mono")
+
+
+
 load('data/Denmark.Rdata')
-ggplot(df %>% filter(year=='y2004', sex=='m', !age%in%c('total','open')))+
+
+df %>% 
+        filter(year=='y2004', sex=='m', !age%in%c('total','open')) %>% 
+        ggplot()+
         geom_line(aes(x = age, y = qx, group = region, color = region))+
         scale_y_continuous(trans = 'log', breaks = c(.0001,.001,.01))+
         theme_few()
